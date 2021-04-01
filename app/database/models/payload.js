@@ -1,6 +1,6 @@
 'use strict';
 
-const payloadModel = require('../mongo').models.payload;
+const payloadModel = require('../connection').models.payload;
 
 /**
  *
@@ -37,7 +37,10 @@ function readAll(data) {
  * @returns {*}
  */
 function deleteOne(payload_id) {
-    return payloadModel.deleteOne({_id: payload_id}).lean().exec();
+    return payloadModel.deleteOne(
+        {
+            _id: payload_id
+        }).lean().exec();
 }
 
 /**
@@ -47,7 +50,13 @@ function deleteOne(payload_id) {
  * @returns {*}
  */
 function updateOne(payload_id, update_payload) {
-    return payloadModel.updateOne({ _id: payload_id }, { $set: update_payload}).lean().exec();
+    return payloadModel.updateOne(
+        {
+            _id: payload_id
+        },
+        {
+            $set: update_payload
+        }).lean().exec();
 }
 
 module.exports = {

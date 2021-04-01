@@ -1,6 +1,6 @@
 'use strict';
 
-const attackResultModel = require('../mongo').models.attackResult;
+const attackResultModel = require('../connection').models.attackResult;
 
 /**
  *
@@ -9,6 +9,7 @@ const attackResultModel = require('../mongo').models.attackResult;
  */
 function create(data) {
     let newAttackResult = new attackResultModel(data);
+
     return newAttackResult.save();
 }
 
@@ -36,7 +37,10 @@ function readAll(data) {
  * @returns {*}
  */
 function deleteOne(attack_id) {
-    return attackResultModel.deleteOne({_id: attack_id}).lean().exec();
+    return attackResultModel.deleteOne(
+        {
+            _id: attack_id
+        }).lean().exec();
 }
 
 module.exports = {

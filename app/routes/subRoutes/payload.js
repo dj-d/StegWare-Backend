@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const payload = require("../../database/models/payload");
+const payload = require('../../database/models/payload');
 
 router.get('/', (req, res) => {
     const payload_id = req.query.payload_id;
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
                 } else {
                     res.status(404)
                         .json({
-                            error: "Payload not found"
+                            error: 'Payload not found'
                         });
                 }
             })
@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
     payload.create(req.body)
         .then((payload) => {
             res.json(payload);
@@ -51,7 +51,7 @@ router.post("/", (req, res) => {
         })
 })
 
-router.delete("/", (req, res) => {
+router.delete('/', (req, res) => {
     const payload_id = req.query.payload_id;
 
     payload.deleteOne(payload_id)
@@ -66,7 +66,7 @@ router.delete("/", (req, res) => {
         })
 })
 
-router.put("/", (req, res) => {
+router.put('/', (req, res) => {
     const payload_id = req.query.payload_id;
 
     payload.updateOne(payload_id, req.body)

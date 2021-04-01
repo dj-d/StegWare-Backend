@@ -1,51 +1,46 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const compression = require('compression');
-const helmet = require('helmet');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+require('dotenv').config();
 
-const indexRouter = require('./routes/index');
+const cookieParser = require('cookie-parser');
+const compression = require('compression');
+const bodyParser = require('body-parser');
+const router = require('./routes/index');
+const express = require('express');
+const helmet = require('helmet');
+const logger = require('morgan');
+const cors = require('cors');
 
 const app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
-app.use(logger('dev'));
-app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(logger('dev'));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 app.use(compression());
-app.use(helmet());
+app.use(helmet())
+
+const PORT = process.env.PORT || 3333;
+const FRONTEND_ORIGINS = process.env.FRONTEND_ORIGINS || 'localhost';
+
+let corsOptions = {
+    allowedHeaders: ['Content-Type'],
+    preflightContinue: true,
+    origin: FRONTEND_ORIGINS
+}
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(cors());
 
-// Load Routes
-app.use('/', indexRouter);
+app.use('/api', router);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404));
-});
+app.use((req, res) => {
+    res.status(404);
+})
 
-// error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.listen(PORT);
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-});
+console.log('Server running on internal port: ' + PORT);
 
 module.exports = app;

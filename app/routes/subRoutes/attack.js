@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
                 } else {
                     res.status(404)
                         .json({
-                            error: "Payload not found"
+                            error: 'Payload not found'
                         });
                 }
             })
@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.delete("/", (req, res) => {
+router.delete('/', (req, res) => {
     const attack_id = req.query.attack_id;
 
     attack.deleteOne(attack_id)
