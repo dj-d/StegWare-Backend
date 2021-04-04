@@ -2,6 +2,9 @@
   "backend": {
     "SERVER_PORT": 3333
   },
+  "frontend": {
+    "FRONTEND_ORIGINS": "localhost"
+  },
   "db": {
     "MONGO_INITDB_DATABASE": "StegWareDB",
     "MONGO_INITDB_ROOT_USERNAME": "admin",
