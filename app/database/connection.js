@@ -3,7 +3,7 @@
 const Mongoose = require('mongoose');
 const config = require('./config/dbConfig');
 
-const LOG_TAG = '\t[MONGODB]\t|';
+const LOG_TAG = '\t[MONGO_DB]\t|';
 
 Mongoose.connect(config.url, config.mongoOptions)
     .then(() => {
