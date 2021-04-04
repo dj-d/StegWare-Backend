@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(compression());
 app.use(helmet())
 
-const PORT = process.env.PORT || 3333;
+const PORT = process.env.SERVER_PORT || 3333;
 const FRONTEND_ORIGINS = process.env.FRONTEND_ORIGINS || 'localhost';
 
 let corsOptions = {
