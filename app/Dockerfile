@@ -1,11 +1,11 @@
 FROM node:latest
 
-ENV PORT=3000
+#ENV PORT=3000
 
 COPY . /app
 WORKDIR /app
 
 RUN npm i -g npm@latest && npm ci && npm audit fix
 
-EXPOSE $PORT
+#EXPOSE $PORT
 ENTRYPOINT ["npm", "start"]
