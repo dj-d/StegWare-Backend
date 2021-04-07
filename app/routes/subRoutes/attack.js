@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const attack = require("../../database/models/attackResult")
+const attack = require("../../database/models/AttackResult")
 
 router.get('/', (req, res) => {
     const attack_id = req.query.attack_id;

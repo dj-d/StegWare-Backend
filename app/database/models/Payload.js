@@ -1,6 +1,6 @@
 'use strict';
 
-const payloadModel = require('../connection').models.payload;
+const payloadModel = require('../Connection').models.payload;
 
 /**
  *

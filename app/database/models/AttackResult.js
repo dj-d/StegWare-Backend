@@ -1,6 +1,6 @@
 'use strict';
 
-const attackResultModel = require('../connection').models.attackResult;
+const attackResultModel = require('../Connection').models.attackResult;
 
 /**
  *

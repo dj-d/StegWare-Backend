@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const payload = require('../../database/models/payload');
+const payload = require('../../database/models/Payload');
 
 router.get('/', (req, res) => {
     const payload_id = req.query.payload_id;
