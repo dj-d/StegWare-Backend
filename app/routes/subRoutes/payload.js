@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const payload = require('../../database/models/Payload');
+const httpStatusCode = require('../../constants/httpStatusCode');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     const payload_id = req.query.payload_id;
 
     if (payload_id) {
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
                 if (payload) {
                     res.json(payload);
                 } else {
-                    res.status(404)
+                    res.status(httpStatusCode.NOT_FOUND)
                         .json({
                             error: 'Payload not found'
                         });
@@ -25,9 +26,9 @@ router.get('/', (req, res) => {
                     });
             })
     } else {
-        payload.readAll()
+        await payload.readAll()
             .then((payload) => {
-                res.json(payload);
+                res.status(httpStatusCode.OK).json(payload);
             })
             .catch((error) => {
                 res.status(error.status)
@@ -36,6 +37,8 @@ router.get('/', (req, res) => {
                     });
             })
     }
+
+    res.end();
 });
 
 router.post('/', (req, res) => {
@@ -44,7 +47,7 @@ router.post('/', (req, res) => {
             res.json(payload);
         })
         .catch((error) => {
-            res.status(500)
+            res.status(httpStatusCode.INTERNAL_SERVER_ERROR)
                 .json({
                     error: error
                 });
@@ -74,7 +77,7 @@ router.put('/', (req, res) => {
             res.json(payload);
         })
         .catch((error) => {
-            res.status(500)
+            res.status(httpStatusCode.INTERNAL_SERVER_ERROR)
                 .json({
                     error: error
                 });
