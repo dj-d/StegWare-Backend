@@ -126,7 +126,7 @@ async function getAll() {
 function remove(payload_id) {
 	const alreadyExist = isPayloadOfDB(payload_id);
 
-	return new Promise(((resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		if (alreadyExist) {
 			resolve(
 				payloadModel.deleteOne(
@@ -141,7 +141,7 @@ function remove(payload_id) {
 			console.log('Payload not exist');
 			reject(payloadError.ERROR);
 		}
-	}));
+	});
 }
 
 
