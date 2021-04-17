@@ -35,7 +35,7 @@ async function isPayloadOfDB(payload_id) {
  * @returns {*}
  */
 async function create(payloadData) {
-	const alreadyExist = await isPayloadOfDB(payloadData);
+	const alreadyExist = await isPayloadOfDB(payloadData); // TODO: To check
 
 	return new Promise((resolve, reject) => {
 		if (!alreadyExist) {
