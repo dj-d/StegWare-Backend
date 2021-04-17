@@ -64,7 +64,7 @@ async function create(payloadData) {
 }
 
 /**
- * Get specific payload by id
+ * Get specific payload by ID
  *
  * @param payload_id
  * @returns {*}
