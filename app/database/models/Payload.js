@@ -60,7 +60,6 @@ async function create(payloadData) {
 			reject(payloadError.ERROR);
 		}
 	});
-
 }
 
 /**
@@ -120,7 +119,7 @@ async function getAll() {
 }
 
 /**
- * Remove specific payload from DB by id
+ * Remove specific payload from DB by ID
  *
  * @param payload_id
  * @returns {*}
@@ -148,7 +147,7 @@ async function remove(payload_id) {
 
 
 /**
- * Update data of specific payload by id
+ * Update data of specific payload by ID
  *
  * @param payload_id
  * @param update_payload
