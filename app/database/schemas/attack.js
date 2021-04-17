@@ -6,7 +6,7 @@ const Mongoose = require('mongoose');
  * Attack collection schema
  * @type {Mongoose.Schema}
  */
-const AttackResultSchema = new Mongoose.Schema({
+const AttackSchema = new Mongoose.Schema({
     _id: {type: String, required: true, default: () => { return Mongoose.Types.ObjectId()._id}},
     device: {
         ip: {type: String, required: true},
@@ -31,6 +31,6 @@ const AttackResultSchema = new Mongoose.Schema({
 /**
  * Model of payload schema
  */
-const attackResultModel = Mongoose.model('attackResult', AttackResultSchema);
+const attackModel = Mongoose.model('attack', AttackSchema);
 
-module.exports = attackResultModel;
+module.exports = attackModel;

@@ -1,7 +1,5 @@
 'use strict';
 
-// TODO: Change file name from AttackResult to Attack
-
 const attackModel = require('../Connection').models.attackResult;
 const attackError = require('../../constants/attackError');
 
@@ -146,10 +144,9 @@ async function remove(attack_id) {
     });
 }
 
-// TODO: Change function name into routes
 module.exports = {
     create,
-    readAll: getAll,
-    readOneById: getById,
-    deleteOne: remove,
+    getAll,
+    getById,
+    remove,
 };

@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const attack = require("../../database/models/AttackResult")
+const attack = require("../../database/models/Attack")
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     const attack_id = req.query.attack_id;
 
     if (attack_id) {
-        attack.readOneById(attack_id)
+        await attack.getById(attack_id)
             .then((attack) => {
                 if (attack) {
                     res.json(attack);
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
                     });
             })
     } else {
-        attack.readAll()
+        await attack.getAll()
             .then((attack) => {
                 res.json(attack);
             })
@@ -38,10 +38,10 @@ router.get('/', (req, res) => {
     }
 });
 
-router.delete('/', (req, res) => {
+router.delete('/', async (req, res) => {
     const attack_id = req.query.attack_id;
 
-    attack.deleteOne(attack_id)
+    await attack.remove(attack_id)
         .then((attack) => {
             res.json(attack);
         })

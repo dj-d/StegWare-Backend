@@ -24,6 +24,6 @@ Mongoose.Promise = global.Promise;
 module.exports = {
     Mongoose, models: {
         payload: require('./schemas/payload.js'),
-        attackResult: require('./schemas/attackResult.js')
+        attackResult: require('./schemas/attack.js')
     }
 };
