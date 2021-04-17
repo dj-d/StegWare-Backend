@@ -1,7 +1,7 @@
 'use strict';
 
 const payloadModel = require('../Connection').models.payload;
-const payloadError = require('../../constants/payloadError')
+const payloadError = require('../../constants/payloadError');
 
 /**
  * Check if payload exist into the DB
@@ -24,7 +24,7 @@ async function isPayloadOfDB(payload_id) {
 					reject(error);
 				}
 			}
-		})
+		});
 	})
 }
 
@@ -54,7 +54,7 @@ async function create(payloadData) {
 						reject(error);
 					}
 				}
-			})
+			});
 		} else {
 			console.log('Payload already exist');
 			reject(payloadError.ERROR);
@@ -88,7 +88,7 @@ function getById(payload_id) {
 						reject(error);
 					}
 				}
-			})
+			});
 		} else {
 			console.log('Payload not exist');
 			reject(payloadError.ERROR);
@@ -113,7 +113,7 @@ async function getAll() {
 					reject(error)
 				}
 			}
-		})
+		});
 	})
 }
 
@@ -173,7 +173,7 @@ function update(payload_id, update_payload) {
 			console.log('Payload not exist');
 			reject(payloadError.ERROR);
 		}
-	})
+	});
 }
 
 module.exports = {
