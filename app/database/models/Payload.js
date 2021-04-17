@@ -82,7 +82,7 @@ async function getById(payload_id) {
 				} else {
 					if (!error) {
 						console.log('Payload - getById - Not data');
-						resolve(payloadError.ERROR);
+						resolve(false);
 					} else {
 						console.log('Payload - getById - Error: ' + error);
 						reject(error);
