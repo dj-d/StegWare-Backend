@@ -69,8 +69,8 @@ async function create(payloadData) {
  * @param payload_id
  * @returns {*}
  */
-function getById(payload_id) {
-	const isValidPayloadID = isPayloadOfDB(payload_id);
+async function getById(payload_id) {
+	const isValidPayloadID = await isPayloadOfDB(payload_id);
 
 	return new Promise((resolve, reject) => {
 		if (isValidPayloadID) {
@@ -123,8 +123,8 @@ async function getAll() {
  * @param payload_id
  * @returns {*}
  */
-function remove(payload_id) {
-	const alreadyExist = isPayloadOfDB(payload_id);
+async function remove(payload_id) {
+	const alreadyExist = await isPayloadOfDB(payload_id);
 
 	return new Promise((resolve, reject) => {
 		if (alreadyExist) {
@@ -152,8 +152,8 @@ function remove(payload_id) {
  * @param update_payload
  * @returns {*}
  */
-function update(payload_id, update_payload) {
-	const alreadyExist = isPayloadOfDB(payload_id);
+async function update(payload_id, update_payload) {
+	const alreadyExist = await isPayloadOfDB(payload_id);
 
 	return new Promise((resolve, reject) => {
 		if (alreadyExist) {
