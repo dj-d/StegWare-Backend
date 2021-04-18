@@ -4,18 +4,22 @@ const router = express.Router();
 const attack = require("../../database/models/Attack");
 const httpStatusCode = require('../../constants/httpStatusCode');
 
-// TODO: Ask to ZappaBoy
-function errorResponse(res, error) {
-	return res.status(error.status)
-		.json({
-			error: error.message
-		});
-}
+function sendResponse(res, attackData) {
+	if (attackData) {
+		return res.status(httpStatusCode.OK)
+			.json(attackData);
+	}
 
-function dataNotFound(res) {
 	return res.status(httpStatusCode.NOT_FOUND)
 		.json({
 			error: 'Attack not found'
+		});
+}
+
+function sendError(res, error) {
+	return res.status(error.status)
+		.json({
+			error: error.message
 		});
 }
 
@@ -28,28 +32,18 @@ router.get('/', async (req, res) => {
 	if (attack_id) {
 		await attack.getById(attack_id)
 			.then((attackData) => {
-				if (attackData) {
-					res.status(httpStatusCode.OK)
-						.json(attackData);
-				} else {
-					dataNotFound(res);
-				}
+				sendResponse(res, attackData);
 			})
 			.catch((error) => {
-				errorResponse(res, error);
+				sendError(res, error);
 			})
 	} else {
 		await attack.getAll()
 			.then((attackData) => {
-				if (attackData) {
-					res.status(httpStatusCode.OK)
-						.json(attackData);
-				} else {
-					dataNotFound(res);
-				}
+				sendResponse(res, attackData);
 			})
 			.catch((error) => {
-				errorResponse(res, error);
+				sendError(res, error);
 			})
 	}
 
@@ -64,15 +58,10 @@ router.delete('/', async (req, res) => {
 
 	await attack.remove(attack_id)
 		.then((attackData) => {
-			if (attackData) {
-				res.status(httpStatusCode.OK)
-					.json(attackData);
-			} else {
-				dataNotFound(res);
-			}
+			sendResponse(res, attackData);
 		})
 		.catch((error) => {
-			errorResponse(res, error);
+			sendError(res, error);
 		})
 
 	res.end();
