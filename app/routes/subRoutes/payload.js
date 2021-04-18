@@ -4,6 +4,25 @@ const router = express.Router();
 const payload = require('../../database/models/Payload');
 const httpStatusCode = require('../../constants/httpStatusCode');
 
+function sendResponse(res, payloadData) {
+	if (payloadData) {
+		return res.status(httpStatusCode.OK)
+			.json(payloadData);
+	} else {
+		return res.status(httpStatusCode.NOT_FOUND)
+			.json({
+				error: 'Payload not found'
+			});
+	}
+}
+
+function sendError(res, error) {
+	return res.status(httpStatusCode.INTERNAL_SERVER_ERROR)
+		.json({
+			error: error.message
+		});
+}
+
 /**
  * Get payload data
  */
@@ -12,35 +31,19 @@ router.get('/', async (req, res) => {
 
 	if (payload_id) {
 		await payload.getById(payload_id)
-			.then((payload) => {
-				if (payload) {
-					res
-						.status(httpStatusCode.OK)
-						.json(payload);
-				} else {
-					res
-						.status(httpStatusCode.NOT_FOUND)
-						.json({
-							error: 'Payload not found'
-						});
-				}
+			.then((payloadData) => {
+				sendResponse(res, payloadData);
 			})
 			.catch((error) => {
-				res.status(error.status)
-					.json({
-						error: error.message
-					});
+				sendError(res, error);
 			})
 	} else {
 		await payload.getAll()
-			.then((payload) => {
-				res.status(httpStatusCode.OK).json(payload);
+			.then((payloadData) => {
+				sendResponse(res, payloadData);
 			})
 			.catch((error) => {
-				res.status(error.status)
-					.json({
-						error: error.message
-					});
+				sendError(res, error);
 			})
 	}
 
@@ -52,14 +55,11 @@ router.get('/', async (req, res) => {
  */
 router.post('/', async (req, res) => {
 	await payload.create(req.body)
-		.then((payload) => {
-			res.json(payload);
+		.then((payloadData) => {
+			sendResponse(res, payloadData);
 		})
 		.catch((error) => {
-			res.status(httpStatusCode.INTERNAL_SERVER_ERROR)
-				.json({
-					error: error
-				});
+			sendError(res, error);
 		})
 })
 
@@ -70,14 +70,11 @@ router.delete('/', async (req, res) => {
 	const payload_id = req.query.payload_id;
 
 	await payload.remove(payload_id)
-		.then((payload) => {
-			res.json(payload);
+		.then((payloadData) => {
+			sendResponse(res, payloadData);
 		})
 		.catch((error) => {
-			res.status(error.status)
-				.json({
-					error: error.message
-				});
+			sendError(res, error);
 		})
 })
 
@@ -88,14 +85,11 @@ router.put('/', async (req, res) => {
 	const payload_id = req.query.payload_id;
 
 	await payload.update(payload_id, req.body)
-		.then((payload) => {
-			res.json(payload);
+		.then((payloadData) => {
+			sendResponse(res, payloadData);
 		})
 		.catch((error) => {
-			res.status(httpStatusCode.INTERNAL_SERVER_ERROR)
-				.json({
-					error: error
-				});
+			sendError(res, error);
 		})
 })
 
