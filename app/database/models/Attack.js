@@ -35,14 +35,14 @@ async function isAttackOfDB(attack_id) {
  * @returns {*}
  */
 async function create(attackData) {
-    const alreadyExist = await isAttackOfDB(attackData);
+    const alreadyExist = await isAttackOfDB(attackData._id);
 
     return new Promise((resolve, reject) => {
-        if (!alreadyExist._id) {
+        if (!alreadyExist) {
             const attack = new attackModel(attackData);
 
-            attack.save((error, attackData) => {
-                if (attackData !== null) {
+            attack.save((error, data) => {
+                if (data !== null) {
                     console.log('Attack - create - Saved');
                     resolve(true);
                 } else {
