@@ -17,7 +17,7 @@ function sendResponse(res, attackData) {
 }
 
 function sendError(res, error) {
-	return res.status(error.status)
+	return res.status(httpStatusCode.INTERNAL_SERVER_ERROR)
 		.json({
 			error: error.message
 		});
