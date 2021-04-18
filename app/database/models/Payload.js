@@ -35,7 +35,7 @@ async function isPayloadOfDB(payload_id) {
  * @returns {*}
  */
 async function create(payloadData) {
-	const alreadyExist = await isPayloadOfDB(payloadData); // TODO: Check + Refactoring
+	const alreadyExist = await isPayloadOfDB(payloadData._id);
 
 	return new Promise((resolve, reject) => {
 		if (!alreadyExist) {
@@ -125,7 +125,7 @@ async function getAll() {
  * @returns {*}
  */
 async function remove(payload_id) {
-	const alreadyExist = await isPayloadOfDB(payload_id); // TODO: Refactoring
+	const alreadyExist = await isPayloadOfDB(payload_id);
 
 	return new Promise((resolve, reject) => {
 		if (alreadyExist) {
@@ -154,7 +154,7 @@ async function remove(payload_id) {
  * @returns {*}
  */
 async function update(payload_id, update_payload) {
-	const alreadyExist = await isPayloadOfDB(payload_id); // TODO: Refactoring
+	const alreadyExist = await isPayloadOfDB(payload_id);
 
 	return new Promise((resolve, reject) => {
 		if (alreadyExist) {

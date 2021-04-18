@@ -20,11 +20,10 @@ app.use(helmet());
 
 const PORT = process.env.SERVER_PORT || 3333;
 const FRONTEND_ORIGINS = process.env.FRONTEND_ORIGINS.split(',') || 'localhost';
-// const FRONTEND_PORT = process.env.FRONTEND_PORT || '3000';
 let ORIGINS = [];
 
-for (let i = 0; i < FRONTEND_ORIGINS.length; i++) {
-    let origin = ('http://' + FRONTEND_ORIGINS[i])
+for (let host of FRONTEND_ORIGINS) {
+    let origin = ('http://' + host);
     origin = origin.replace(/\s/g, '');
     ORIGINS.push(origin);
 }
