@@ -19,19 +19,19 @@ app.use(compression());
 app.use(helmet());
 
 const PORT = process.env.SERVER_PORT || 3333;
-const FRONTEND_ORIGINS = process.env.FRONTEND_ORIGINS.split(',') || 'localhost';
-let ORIGINS = [];
-
-for (let host of FRONTEND_ORIGINS) {
-    let origin = ('http://' + host);
-    origin = origin.replace(/\s/g, '');
-    ORIGINS.push(origin);
-}
+// const FRONTEND_ORIGINS = process.env.FRONTEND_ORIGINS.split(',') || 'localhost';
+// let ORIGINS = [];
+//
+// for (let host of FRONTEND_ORIGINS) {
+//     let origin = ('http://' + host);
+//     origin = origin.replace(/\s/g, '');
+//     ORIGINS.push(origin);
+// }
 
 let corsOptions = {
     allowedHeaders: ['Content-Type'],
     preflightContinue: true,
-    origin: ORIGINS
+    origin: true
 }
 
 app.use(cors(corsOptions));
