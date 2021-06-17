@@ -51,6 +51,19 @@ router.get('/', async (req, res) => {
 });
 
 /**
+ * Add attack
+ */
+router.post('/', async (req, res) => {
+	await attack.create(req.body)
+		.then((attackData) => {
+			sendResponse(res, attackData);
+		})
+		.catch((error) => {
+			sendError(res, error);
+		})
+})
+
+/**
  * Remove specific attack
  */
 router.delete('/', async (req, res) => {
