@@ -9,8 +9,6 @@ const Mongoose = require('mongoose');
 const AttackSchema = new Mongoose.Schema({
     _id: {type: String, required: true, default: () => { return Mongoose.Types.ObjectId()._id}},
     device: {
-        ip: {type: String, required: true},
-        port: {type: Number, required: true},
         model: {type: String, required: true},
         api: {type: Number, required: true},
         permissions: [{type: String}]
