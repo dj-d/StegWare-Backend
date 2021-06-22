@@ -16,7 +16,6 @@ const AttackSchema = new Mongoose.Schema({
     timestamp: {type: Number, required: true, default: () => { return Math.floor(new Date().getTime()/1000)}},
     payload_id: {type: String, required: true},
     timing: {
-        download_time : {type: Number},
         parse_time : {type: Number},
         compile_time : {type: Number},
         dynamic_loading_time : {type: Number},
