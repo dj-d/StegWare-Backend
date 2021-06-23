@@ -14,12 +14,12 @@ const AttackSchema = new Mongoose.Schema({
         permissions: [{type: String}]
     },
     timestamp: {type: Number, required: true, default: () => { return Math.floor(new Date().getTime()/1000)}},
-    payload_id: {type: String, required: true},
+    payloadId: {type: String, required: true},
     timing: {
-        parse_time : {type: Number},
-        compile_time : {type: Number},
-        dynamic_loading_time : {type: Number},
-        execution_time : {type: Number},
+        parseTime : {type: Number},
+        compileTime : {type: Number},
+        dynamicLoadingTime : {type: Number},
+        executionTime : {type: Number},
     },
     resultType: {type: String, required: true},
     result: {type: String, required: true}
