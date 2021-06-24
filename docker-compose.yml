@@ -34,7 +34,7 @@ services:
     volumes:
       - './app/database/dump:/docker-entrypoint-initdb.d'
     networks:
-      stegware-net
+      - stegware-net
 
 volumes:
   mongo:
