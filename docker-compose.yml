@@ -15,6 +15,9 @@ services:
       - mongo
     links:
       - mongo
+    networks:
+      - stegware-net
+      - stegware-mongo-net
 
   # MongoDB
   mongo:
@@ -30,7 +33,14 @@ services:
       - "${MONGO_PORT}:27017"
     volumes:
       - './app/database/dump:/docker-entrypoint-initdb.d'
+    networks:
+      stegware-net
 
 volumes:
   mongo:
     driver: local
+
+networks:
+  stegware-net:
+    driver: bridge
+  stegware-mongo-net:
